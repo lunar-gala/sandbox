@@ -1,3 +1,13 @@
 /**
  * Styles for index
  */
+
+body {
+  background: url(../../assets/img/sunset.jpg) no-repeat center center fixed;
+  background-size: cover;
+}
+
+.app {
+  display: flex;
+  flex-direction: row;
+}
