@@ -12,6 +12,7 @@ class App extends React.Component {
       <div className='app'>
         <Bounce img={IMG_MASK} />
         <Person />
+        <Person />
         <Swirl />
       </div>
     );
