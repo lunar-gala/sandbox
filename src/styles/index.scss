@@ -2,12 +2,58 @@
  * Styles for index
  */
 
+// Import fonts
+@font-face {
+  font-family: 'DIN Bold';
+  src: url('../../assets/fonts/dinpro-bold-webfont.eot'),
+  url('../../assets/fonts/dinpro-bold-webfont.woff2') format('woff2'),
+  url('../../assets/fonts/dinpro-bold-webfont.woff') format('woff'),
+  url('../../assets/fonts/dinpro-bold-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DIN Medium';
+  src: url('../../assets/fonts/dinpro-medium-webfont.eot'),
+  url('../../assets/fonts/dinpro-medium-webfont.woff2') format('woff2'),
+  url('../../assets/fonts/dinpro-medium-webfont.woff') format('woff'),
+  url('../../assets/fonts/dinpro-medium-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DIN Regular';
+  src: url('../../assets/fonts/dinpro-regular-webfont.eot');
+  src: url('../../assets/fonts/dinpro-regular-webfontd41d.eot?#iefix') format('embedded-opentype'),
+  url('../../assets/fonts/dinpro-regular-webfont.woff2') format('woff2'),
+  url('../../assets/fonts/dinpro-regular-webfont.woff') format('woff'),
+  url('../../assets/fonts/dinpro-regular-webfont.ttf') format('truetype'),
+  url('../../assets/fonts/dinpro-regular-webfont.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DIN Light';
+  src: url('../../assets/fonts/DIN-Light.eot');
+  src: url('../../assets/fonts/DIN-Lightd41d.eot?#iefix') format('embedded-opentype'),
+  url('../../assets/fonts/DIN-Light.woff') format('woff'),
+  url('../../assets/fonts/DIN-Light.ttf') format('truetype'),
+  url('../../assets/fonts/DIN-Light.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
+  font-family: 'DIN Regular', sans-serif;
   background: url(../../assets/img/sunset.jpg) no-repeat center center fixed;
   background-size: cover;
+  margin: 0;
 }
 
 .app {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }

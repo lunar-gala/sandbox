@@ -1,0 +1,47 @@
+/**
+ * Header slide
+ */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+
+  .scroll {
+    height: 10vh;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .header-logo {
+    height: 50vh;
+  }
+
+  .marquee {
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    position: absolute;
+    top: 10vh;
+
+    span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 10s linear infinite;
+      font-size: 24pt;
+    }
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(-100%, 0);
+    }
+  }
+}
