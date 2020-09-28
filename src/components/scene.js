@@ -2,8 +2,13 @@
  * three.js demo
  */
 
-import * as THREE from 'three';
 import React from 'react';
+import * as THREE from 'three';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import cannon from '../../assets/models/cannon/model.obj';
+import cannon_skin from '../../assets/models/cannon/materials.mtl';
 
 class Scene extends React.Component {
   componentDidMount() {
@@ -29,7 +34,9 @@ class Scene extends React.Component {
 
     const cube = new THREE.Mesh(geometry, material);
 
-    scene.add(cube);
+    // scene.add(cube);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
 
     // Add a light
     const color = 0xFFFFFF;
@@ -38,8 +45,41 @@ class Scene extends React.Component {
     light.position.set(-1, 2, 4);
     scene.add(light);
 
+    // Add object
+    // instantiate a loader
+    const obj_loader = new OBJLoader();
+
+    const mtl_loader = new MTLLoader();
+
+    mtl_loader.load(
+      cannon_skin,
+      (materials) => {
+        materials.preload();
+
+        obj_loader.setMaterials(materials);
+        // load a resource
+        obj_loader.load(
+          // resource URL
+          cannon,
+          // called when resource is loaded
+          function (object) {
+            scene.add(object);
+          },
+          // called when loading is in progresses
+          function (xhr) {
+            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+          },
+          // called when loading has errors
+          function (error) {
+            console.log('An error happened', error);
+          }
+        );
+      }
+    );
+
+
     // Resize if needed
-    function resizeRendererToDisplaySize (renderer) {
+    function resizeRendererToDisplaySize(renderer) {
       const canvas = renderer.domElement;
       const width = canvas.clientWidth;
       const height = canvas.clientHeight;
@@ -67,6 +107,8 @@ class Scene extends React.Component {
       cube.rotation.x = time;
       cube.rotation.y = time;
 
+      controls.update();
+
       renderer.render(scene, camera);
 
       requestAnimationFrame(render_cube);
@@ -75,7 +117,10 @@ class Scene extends React.Component {
   }
 
   render() {
-    return <canvas id='scene-canvas' />;
+    return <div className='scene-wrapper'>
+      <h1>3D EXAMPLE</h1>
+      <canvas id='scene-canvas' />
+    </div>;
   }
 }
 
