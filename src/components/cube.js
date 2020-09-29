@@ -9,7 +9,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 class Cube extends React.Component {
   componentDidMount() {
     const canvas = document.querySelector('#scene-canvas-cube');
-    const renderer = new THREE.WebGLRenderer({ canvas });
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 
     const scene = new THREE.Scene();
 
@@ -19,7 +19,7 @@ class Cube extends React.Component {
     const cube_size = size - cube_padding;
     const NUM_CUBES = 6;
     const COLOR_CUBE_EDGE = 0xffffff;
-    const max_size = 10 * cube_size;
+    const max_size = 20 * cube_size;
 
     let rectangles = {
       front: [],
@@ -51,7 +51,7 @@ class Cube extends React.Component {
     // Bottom panel
     for (let x = 0; x < NUM_CUBES; x++) {
       for (let y = 0; y < NUM_CUBES; y++) {
-        let boxGeometry = new THREE.BoxBufferGeometry(cube_size, cube_size, 10 * cube_size)
+        let boxGeometry = new THREE.BoxBufferGeometry(cube_size, cube_size, max_size)
         let geometry = new THREE.EdgesGeometry(boxGeometry);
         let edges = new THREE.LineSegments(geometry, new THREE.LineBasicMaterial({ color: COLOR_CUBE_EDGE }));
         const material = new THREE.MeshBasicMaterial({ color: 0x0 });
@@ -74,7 +74,7 @@ class Cube extends React.Component {
     // Side panel
     for (let x = 0; x < NUM_CUBES; x++) {
       for (let y = 0; y < NUM_CUBES; y++) {
-        let boxGeometry = new THREE.BoxBufferGeometry(cube_size, cube_size, 10 * cube_size)
+        let boxGeometry = new THREE.BoxBufferGeometry(cube_size, cube_size, max_size)
         let geometry = new THREE.EdgesGeometry(boxGeometry);
         let edges = new THREE.LineSegments(geometry, new THREE.LineBasicMaterial({ color: COLOR_CUBE_EDGE }));
 
