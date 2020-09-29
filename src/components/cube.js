@@ -143,25 +143,27 @@ class Cube extends React.Component {
 
       renderer.render(scene, camera);
 
-      const SEED_AMPLIFIER = 10;
+      const SEED_AMPLIFIER = 5;
+      const AMPLITUDE = 0.01;
+      const SPEED = 0.005;
       // Animate rectangle block
       for (let i = 0; i < rectangles.front.length; i++) {
         let curr_box = rectangles.front[i];
 
-        curr_box.rect.position.z += 0.01 * Math.sin(0.005 * time + curr_box.seed * SEED_AMPLIFIER);
-        curr_box.outline.position.z += 0.01 * Math.sin(0.005 * time + curr_box.seed * SEED_AMPLIFIER);
+        curr_box.rect.position.z += AMPLITUDE * Math.sin(SPEED * time + curr_box.seed * SEED_AMPLIFIER);
+        curr_box.outline.position.z += AMPLITUDE * Math.sin(SPEED * time + curr_box.seed * SEED_AMPLIFIER);
       }
       for (let i = 0; i < rectangles.bottom.length; i++) {
         let curr_box = rectangles.bottom[i];
 
-        curr_box.rect.position.y += 0.01 * Math.sin(0.005 * time + curr_box.seed * SEED_AMPLIFIER);
-        curr_box.outline.position.y += 0.01 * Math.sin(0.005 * time + curr_box.seed * SEED_AMPLIFIER);
+        curr_box.rect.position.y += AMPLITUDE * Math.sin(SPEED * time + curr_box.seed * SEED_AMPLIFIER);
+        curr_box.outline.position.y += AMPLITUDE * Math.sin(SPEED * time + curr_box.seed * SEED_AMPLIFIER);
       }
       for (let i = 0; i < rectangles.side.length; i++) {
         let curr_box = rectangles.side[i];
 
-        curr_box.rect.position.x += 0.01 * Math.sin(0.005 * time + curr_box.seed * SEED_AMPLIFIER);
-        curr_box.outline.position.x += 0.01 * Math.sin(0.005 * time + curr_box.seed * SEED_AMPLIFIER);
+        curr_box.rect.position.x += AMPLITUDE * Math.sin(SPEED * time + curr_box.seed * SEED_AMPLIFIER);
+        curr_box.outline.position.x += AMPLITUDE * Math.sin(SPEED * time + curr_box.seed * SEED_AMPLIFIER);
       }
 
       requestAnimationFrame(render);
