@@ -25,25 +25,16 @@ class Scene extends React.Component {
 
     const scene = new THREE.Scene();
 
-    const boxWidth = 1;
-    const boxHeight = 1;
-    const boxDepth = 1;
-    const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
-
-    const material = new THREE.MeshPhongMaterial({ color: 0x44aa88 });
-
-    const cube = new THREE.Mesh(geometry, material);
-
-    // scene.add(cube);
-
     const controls = new OrbitControls(camera, renderer.domElement);
 
     // Add a light
     const color = 0xFFFFFF;
-    const intensity = 1;
-    const light = new THREE.DirectionalLight(color, intensity);
-    light.position.set(-1, 2, 4);
-    scene.add(light);
+    const intensity = 0.5;
+    const light_amb = new THREE.AmbientLight(color, intensity);
+    const light_dir = new THREE.DirectionalLight(color, intensity*2);
+    light_dir.position.set(0, 1, 4);
+    scene.add(light_amb);
+    scene.add(light_dir);
 
     // Add object
     // instantiate a loader
@@ -91,9 +82,7 @@ class Scene extends React.Component {
     }
 
     // requestAnimationFrame passes time in as seconds
-    function render_cube(time) {
-      time *= 0.001;
-
+    function render_cube() {
       if (resizeRendererToDisplaySize(renderer)) {
         const canvas = renderer.domElement;
         camera.aspect = canvas.clientWidth / canvas.clientHeight;
@@ -103,9 +92,6 @@ class Scene extends React.Component {
       const canvas = renderer.domElement;
       camera.aspect = canvas.clientWidth / canvas.clientHeight;
       camera.updateProjectionMatrix();
-
-      cube.rotation.x = time;
-      cube.rotation.y = time;
 
       controls.update();
 
@@ -119,7 +105,7 @@ class Scene extends React.Component {
   render() {
     return <div className='scene-wrapper'>
       <h1>3D EXAMPLE</h1>
-      <canvas id='scene-canvas' />
+      <canvas id='scene-canvas' className='scene-canvas' />
     </div>;
   }
 }

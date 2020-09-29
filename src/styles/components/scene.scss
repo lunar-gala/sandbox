@@ -12,7 +12,16 @@
 
 }
 
-#scene-canvas {
-  height: 75vh;
-  width: 50%;
+@media (min-aspect-ratio: "5/4") {
+  .scene-canvas {
+    height: 75vh;
+    width: 50%;
+  }
+}
+
+@media (max-aspect-ratio: "5/4") {
+  .scene-canvas {
+    height: 75vh;
+    width: 90%;
+  }
 }

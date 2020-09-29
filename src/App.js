@@ -1,12 +1,7 @@
 import React from 'react';
-import Bounce from './components/bounce';
-import Person from './components/person';
-import Swirl from './components/swirl';
 import Scene from './components/scene';
+import Scene2 from './components/scene2';
 import Header from './components/header';
-
-// image impors
-import IMG_MASK from '../assets/img/mask.png';
 
 class App extends React.Component {
   render () {
@@ -14,6 +9,7 @@ class App extends React.Component {
       <div className='app'>
         <Header />
         <Scene />
+        <Scene2 />
       </div>
     );
   }
