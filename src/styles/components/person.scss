@@ -1,0 +1,55 @@
+/**
+ * Dress somebody up one by one
+ */
+
+$ANIMATION-DURATION: 4s;
+
+@keyframes dressup-hat {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes dressup-jacket {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.person {
+  height: 40vh;
+  width: 40vh;
+  transform: translate(0, 100px);
+
+  img {
+    position: absolute;
+
+    &.face {
+      height: 20vh;
+    }
+
+    &.hat {
+      height: 20vh;
+      transform: translate(-10px, -70px);
+      animation: dressup-hat $ANIMATION-DURATION infinite;
+    }
+
+    &.jacket {
+      transform: translate(-100px, 130px);
+      height: 40vh;
+      animation: dressup-jacket $ANIMATION-DURATION infinite;
+    }
+  }
+}
