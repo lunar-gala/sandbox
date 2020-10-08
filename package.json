@@ -57,7 +57,9 @@
     "webpack-merge": "^5.1.4"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "socket.io": "^2.3.0"
   }
 }
