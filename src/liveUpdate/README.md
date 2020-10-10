@@ -7,7 +7,7 @@ To run (from the main directory), install the necessary dependancies
 and then run 
 
 ```sh
-npm src/liveUpdate/index.ts
+node src/liveUpdate/index.ts
 ```
 
 Essentially, it starts a local server at 3000, and then waits for a user to send 
