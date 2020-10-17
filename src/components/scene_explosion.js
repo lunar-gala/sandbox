@@ -1,6 +1,6 @@
 /**
- * three.js demo
- */
+* three.js demo
+*/
 
 import React from 'react';
 import * as THREE from 'three';
@@ -18,10 +18,12 @@ class Scene_Explosion extends React.Component {
     const fov = 75;
     const aspect = 2;  // the canvas default
     const near = 0.1;
-    const far = 1000;
+    const far = 10000;
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
-    camera.position.z = 400;
+    camera.position.x = 1000;
+    camera.position.y = 1000;
+    camera.position.z = 1000;
 
     const scene = new THREE.Scene();
 
@@ -59,8 +61,21 @@ class Scene_Explosion extends React.Component {
             scene.add(object);
 
             object.traverse( child => {
-              cube_children.push(child);
-            })
+              let bbox = new THREE.Box3().setFromObject(child);
+              cube_children.push({
+                obj: child,
+                vector: bbox.max
+              });
+            });
+
+            // Center vectors
+            let centroid = new THREE.Vector3(0, 0, 0);
+
+            cube_children.map(e => centroid.add(e.vector));
+
+            centroid = centroid.divideScalar(cube_children.length);
+
+            cube_children.map(e => e.vector.sub(centroid));
           },
           // called when loading is in progresses
           function (xhr) {
@@ -70,58 +85,67 @@ class Scene_Explosion extends React.Component {
           function (error) {
             console.log('An error happened', error);
           }
+          );
+        }
         );
-      }
-    );
 
+        // Resize if needed
+        function resizeRendererToDisplaySize(renderer) {
+          const canvas = renderer.domElement;
+          const width = canvas.clientWidth;
+          const height = canvas.clientHeight;
+          const needResize = canvas.width !== width || canvas.height !== height;
+          if (needResize) {
+            renderer.setSize(width, height, false);
+          }
+          return needResize;
+        }
 
-    // Resize if needed
-    function resizeRendererToDisplaySize(renderer) {
-      const canvas = renderer.domElement;
-      const width = canvas.clientWidth;
-      const height = canvas.clientHeight;
-      const needResize = canvas.width !== width || canvas.height !== height;
-      if (needResize) {
-        renderer.setSize(width, height, false);
+        // requestAnimationFrame passes time in as seconds
+        function render_cube (time) {
+          if (resizeRendererToDisplaySize(renderer)) {
+            const canvas = renderer.domElement;
+            camera.aspect = canvas.clientWidth / canvas.clientHeight;
+            camera.updateProjectionMatrix();
+          }
+
+          // Update cube positions
+          for (let i = 0; i < cube_children.length; i++) {
+            let curr_cube = cube_children[i].obj;
+            if (time / 1000 < 3) {
+              // Buildup before explosion
+              curr_cube.position.x = curr_cube.position.x + (Math.random() - 0.5);
+              curr_cube.position.y = curr_cube.position.y + (Math.random() - 0.5);
+              curr_cube.position.z = curr_cube.position.z + (Math.random() - 0.5);
+            } else if (time / 1000 < 3.5) {
+              // Explosion time
+              let curr_factor = Math.pow((time/1000 - 3) / 70, 0.1);
+
+              curr_cube.position.x += curr_factor * cube_children[i].vector.x;
+              curr_cube.position.y += curr_factor * cube_children[i].vector.y;
+              curr_cube.position.z += curr_factor * cube_children[i].vector.z;
+            }
+          }
+
+          const canvas = renderer.domElement;
+          camera.aspect = canvas.clientWidth / canvas.clientHeight;
+          camera.updateProjectionMatrix();
+
+          controls.update();
+
+          renderer.render(scene, camera);
+
+          requestAnimationFrame(render_cube);
+        }
+        requestAnimationFrame(render_cube);
       }
-      return needResize;
+
+      render() {
+        return <div className='scene-wrapper'>
+        <h1>3D FRACTURED EXPLOSION</h1>
+        <canvas id='scene-canvas-explosion' className='scene-canvas' />
+        </div>;
+      }
     }
 
-    // requestAnimationFrame passes time in as seconds
-    function render_cube (time) {
-      if (resizeRendererToDisplaySize(renderer)) {
-        const canvas = renderer.domElement;
-        camera.aspect = canvas.clientWidth / canvas.clientHeight;
-        camera.updateProjectionMatrix();
-      }
-
-      // Update cube positions
-      for (let i = 0; i < cube_children.length; i++) {
-        let curr_cube = cube_children[i];
-        curr_cube.position.x = curr_cube.position.x + (Math.random() - 0.5);
-        curr_cube.position.y = curr_cube.position.y + (Math.random() - 0.5);
-        curr_cube.position.z = curr_cube.position.z + (Math.random() - 0.5);
-      }
-
-      const canvas = renderer.domElement;
-      camera.aspect = canvas.clientWidth / canvas.clientHeight;
-      camera.updateProjectionMatrix();
-
-      controls.update();
-
-      renderer.render(scene, camera);
-
-      requestAnimationFrame(render_cube);
-    }
-    requestAnimationFrame(render_cube);
-  }
-
-  render() {
-    return <div className='scene-wrapper'>
-      <h1>3D EXAMPLE</h1>
-      <canvas id='scene-canvas-explosion' className='scene-canvas' />
-    </div>;
-  }
-}
-
-export default Scene_Explosion;
+    export default Scene_Explosion;
