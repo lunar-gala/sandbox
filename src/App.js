@@ -9,6 +9,7 @@ import Scene from './components/scene';
 import Scene2 from './components/scene2';
 import Scene_Materials from './components/scene_materials';
 import Scene_Explosion from './components/scene_explosion';
+import Scene_Points from './components/scene_points';
 
 class App extends React.Component {
   render () {
@@ -16,6 +17,7 @@ class App extends React.Component {
       <div className='app'>
         <Header />
         <Scene_Explosion />
+        <Scene_Points />
         <Cube />
         <Scene_Materials />
         <Scene2 />

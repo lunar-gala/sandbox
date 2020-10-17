@@ -58,6 +58,7 @@ class Scene_Explosion extends React.Component {
           cube_fragments,
           // called when resource is loaded
           function (object) {
+            console.log(object);
             scene.add(object);
 
             object.traverse( child => {
@@ -66,6 +67,7 @@ class Scene_Explosion extends React.Component {
                 obj: child,
                 vector: bbox.max
               });
+              console.log(child)
             });
 
             // Center vectors
@@ -112,12 +114,12 @@ class Scene_Explosion extends React.Component {
           // Update cube positions
           for (let i = 0; i < cube_children.length; i++) {
             let curr_cube = cube_children[i].obj;
-            if (time / 1000 < 3) {
+            if (time / 1000 < 5) {
               // Buildup before explosion
-              curr_cube.position.x = curr_cube.position.x + (Math.random() - 0.5);
-              curr_cube.position.y = curr_cube.position.y + (Math.random() - 0.5);
-              curr_cube.position.z = curr_cube.position.z + (Math.random() - 0.5);
-            } else if (time / 1000 < 3.5) {
+              curr_cube.position.x = curr_cube.position.x + (Math.random() - 0.5)*3;
+              curr_cube.position.y = curr_cube.position.y + (Math.random() - 0.5)*3;
+              curr_cube.position.z = curr_cube.position.z + (Math.random() - 0.5)*3;
+            } else if (time / 1000 < 5.5) {
               // Explosion time
               let curr_factor = Math.pow((time/1000 - 3) / 70, 0.1);
 
@@ -142,7 +144,7 @@ class Scene_Explosion extends React.Component {
 
       render() {
         return <div className='scene-wrapper'>
-        <h1>3D FRACTURED EXPLOSION</h1>
+        <h1>3D EXPLOSION (TIME)</h1>
         <canvas id='scene-canvas-explosion' className='scene-canvas' />
         </div>;
       }
