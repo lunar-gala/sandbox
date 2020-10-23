@@ -1,6 +1,11 @@
+const port = process.env.PORT || 80;
+var server = require('https').Server();
+var io = require('socket.io')(server);
 var app = require('express')();
+
+/*
 var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+*/
 
 app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/index.html');
@@ -30,6 +35,6 @@ io.on('connection', (socket) => {
 });
 
 
-http.listen(3000, () => {
-	console.log('listening on *:3000');
+server.listen(port, 'ec2-54-145-225-18.compute-1.amazonaws.com', () => {
+	console.log('listening on *:aws ec2');
 });
