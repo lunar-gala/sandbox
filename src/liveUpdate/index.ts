@@ -1,7 +1,13 @@
-const port = process.env.PORT || 80;
+
+/*const port = process.env.PORT || 80;
 var server = require('https').Server();
 var io = require('socket.io')(server);
 var app = require('express')();
+*/
+
+var app = require('express')();
+var http = require('http').createServer(app);
+var io = require('socket.io')(http);
 
 /*
 var http = require('http').createServer(app);
@@ -22,19 +28,28 @@ io.on('connection', (socket) => {
 	});
 	socket.on('chat message', (msg) => {
 		io.emit('chat message', msg);
-		console.log('message: ' + msg);
 	});
 	socket.on('change image', (url, size) => {
 		io.emit('change image', url, size);
-		console.log(url);
 	})
 	socket.on('change video', (url) => {
 		io.emit('change video', url);
-		console.log(url);
+	})
+	socket.on('change mode', (mode) => {
+		io.emit('change mode', mode);
+	})
+
+	socket.on('change vidvis', (visibility) => {
+		io.emit('change vidvis', visibility);
 	})
 });
 
-
+/*
 server.listen(port, 'ec2-54-145-225-18.compute-1.amazonaws.com', () => {
 	console.log('listening on *:aws ec2');
+});
+*/
+
+http.listen(3000, () => {
+	console.log('listening on *:3000');
 });

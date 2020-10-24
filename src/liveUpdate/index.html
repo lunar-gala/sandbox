@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Socket.IO chat</title>
+    <title>Live Update Demo</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -70,17 +70,19 @@
     </style>
 </head>
 
-<body>
+<body id="body">
+    <!--
     <ul id="messages"></ul>
     <form action="">
         <input id="m" autocomplete="off" /><button>Send</button>
     </form>
-
+-->
     <div class="container text-center">
-        <img id="image" src="https://picsum.photos/200" alt="Lamp" width="300" height="300">
+        <img id="image" src="https://picsum.photos/300" alt="Lamp" width="300" height="300">
+        <h3>Image Size : <span id="size-text">300</span></h3>
         <br><br>
 
-        <iframe id="video" width="420" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+        <iframe id="video" width="420" height="315" src="https://www.youtube.com/embed/D-ya6U-pbWo">
         </iframe>
         <br><br>
         <a href="update" target="_blank">go to other page</a>
@@ -104,11 +106,34 @@
                 $("#image").attr("src", url);
                 $("#image").attr("width", size);
                 $("#image").attr("height", size);
+                $("#size-text").text(size);
             });
 
             socket.on('change video', function (url) {
                 console.log("changing video");
                 $("#video").attr("src", url);
+            });
+
+            socket.on('change mode', function (mode) {
+                console.log("changing mode");
+                if (mode == "mode1") {
+                    $("#body").css("background-color", "#000");
+                    $("#body").css("color", "#FFF");
+                    $("#body").css("font-family", "'Impact', Charcoal, sans-serif");
+                } else if (mode == "mode2") {
+                    $("#body").css("background-color", "#333");
+                    $("#body").css("color", "#FFF");
+                    $("#body").css("font-family", "'Times New Roman', Times, serif");
+                } else {
+                    $("#body").css("background-color", "#FFF");
+                    $("#body").css("color", "#000");
+                    $("#body").css("font-family", "'Comic Sans MS', cursive, sans-serif");
+                }
+            });
+
+            socket.on('change vidvis', function (visibility) {
+                console.log("changing video visibility");
+                $("#video").css("visibility", visibility);
             });
         });
     </script>

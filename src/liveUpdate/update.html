@@ -26,11 +26,27 @@
 
 <body>
     <div class="container text-center mt-5">
+        <h5>Image:</h5>
         <input type="number" id="size"  placeholder="image size">
         <button class="btn btn-primary" id="imgTarget">Change picture</button>
         <br><br>
+        <h5>Video Source:</h5>
         <input type="text" id="urlInput" placeholder="video url">
         <button class="btn btn-primary" id="vidTarget">Change video</button>
+        <br><br>
+        <h5>Mode:</h5>
+        <input type="radio" id="mode1" name="mode" value="mode1">
+        <label for="mode1">Mode 1</label><br>
+        <input type="radio" id="mode2" name="mode" value="mode2">
+        <label for="mode2">Mode 2</label><br>
+        <input type="radio" id="mode3" name="mode" value="mode3">
+        <label for="mode3">Mode 3</label>
+        <br><br>
+        <h5>Video Visibility:</h5>
+        <input type="radio" id="visible" name="vidvis" value="visible" checked>
+        <label for="visible">Visible</label><br>
+        <input type="radio" id="hidden" name="vidvis" value="hidden">
+        <label for="hidden">Hidden</label><br>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
@@ -47,6 +63,18 @@
             var url = $("#urlInput").val();
             socket.emit('change video', url);
         })
+
+        $('input[type=radio][name=mode]').change(function() {
+            console.log("Changed to " + this.value)
+            socket.emit('change mode', this.value); 
+        });
+
+        $('input[type=radio][name=vidvis]').change(function() {
+            console.log("Video changed to " + this.value)
+            socket.emit('change vidvis', this.value); 
+        });
+
+
     </script>
 </body>
 
