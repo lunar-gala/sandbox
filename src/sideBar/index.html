@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Sidebar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
+        integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
+        crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background: url(../../assets/img/sunset.jpg) no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .sidepanel {
+            height: 100vh;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, .8);
+            overflow-x: hidden;
+            padding-top: 60px;
+            transition: 0.2s;
+        }
+
+        .sidepanel a {
+            padding: 0;
+            text-decoration: none;
+            font-size: 80px;
+            color: #818181;
+            display: block;
+            transition: 0.2s;
+            font-family:Georgia, 'Times New Roman', Times, serif
+        }
+
+        .sidepanel a:hover {
+            color: #f1f1f1;
+
+        }
+
+        .hoverMargin {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            transition: 0.2x;
+        }
+
+        .hoverMargin:hover {
+            transition: 0.2s;
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+
+        .sidepanel .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        .openbtn {
+            transform: rotate(7deg);
+            -ms-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -webkit-transform: rotate(90deg);
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #111;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            position: absolute;
+            margin: none;
+            left: 0;
+            top: 45vh;
+            vertical-align: top;
+        }
+
+        .openbtn:hover {
+            background-color: #444;
+        }
+
+        .navLine {
+            border-top: .5px solid #818181;
+            width: 60vw;
+        }
+    </style>
+
+
+</head>
+
+<body id="body p-5">
+    <div class="container">
+        <br>
+        <div id="navPanel" class="sidepanel text-center">
+            <a id="closeNav" href="javascript:void(0)" class="closebtn">&times;</a>
+            <a class="hoverMargin" href="#">About</a>
+            <hr class="navLine">
+            <a class="hoverMargin" href="#">Show</a>
+            <hr class="navLine">
+            <a class="hoverMargin" href="#">Creative</a>
+            <hr class="navLine">
+            <a class="hoverMargin" href="#">Gallery</a>
+        </div>
+        <button id="openNav" class="openbtn">MENU</button>
+        <h2>Sidebar Navigation Demo</h2>
+    </div>
+
+
+
+    <script>
+
+        $('#navPanel').click(function (e) {
+            document.getElementById("navPanel").style.width = "0";
+        });
+
+        $('#closeNav').click(function (e) {
+            document.getElementById("navPanel").style.width = "0";
+        });
+
+        $('#openNav').click(function (e) {
+            document.getElementById("navPanel").style.width = "100vw";
+        });
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+</body>
+
+</html>
